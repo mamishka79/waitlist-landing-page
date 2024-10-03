@@ -3,62 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waitlist for Startup Idea</title>
+    <title>Day Planner Bot</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #f4f4f4;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+        section {
+            padding: 2rem;
         }
         .container {
-            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .description {
+            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+        .features {
+            margin: 2rem 0;
+            text-align: left;
             background-color: #fff;
-            padding: 20px;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .features h3 {
+            font-size: 1.5rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+        .features p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .features strong {
+            color: #333;
+        }
+
+        /* Horizontal Scrolling Gallery */
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; /* Enables snapping */
+            gap: 20px;
+            padding: 10px 0;
+            scroll-padding: 0 50%; /* Centering effect when scroll snaps */
+        }
+        .gallery-container img {
+            flex-shrink: 0;
+            width: 300px;
+            height: auto;
+            scroll-snap-align: center; /* Each image will snap to the center */
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-container img:hover {
+            transform: scale(1.05); /* Image enlarges slightly when hovered */
+        }
+
+        /* Waitlist and Plugin Block Layout */
+        .two-column-layout {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .plugin-block, .waitlist-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        .plugin-block h2 {
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+        .plugin-block p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .plugin-block a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .waitlist-container h2 {
+            margin-bottom: 1rem;
+            color: #4CAF50;
+        }
+        .waitlist-container input[type="email"] {
+            padding: 0.8rem;
+            width: 80%;
+            font-size: 1rem;
+            border: 2px solid #ccc;
             border-radius: 8px;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
         }
-        input[type="email"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #28a745;
+        .waitlist-container button {
+            padding: 0.8rem 2rem;
+            background-color: #4CAF50;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            font-size: 1rem;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        button:hover {
-            background-color: #218838;
+        .waitlist-container button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .gallery-container img {
+                width: 200px; /* Smaller images on mobile */
+            }
+            .two-column-layout {
+                flex-direction: column; /* Stack on mobile */
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Join the Waitlist</h1>
-        <p>
-            It's hard to concentrate when you're constantly getting thoughts or tasks in your mind. 
-            I want to build a program where you can write or record voice notes for all your thoughts and tasks. 
-            The program will analyze, categorize, and send you reminders.
-        </p>
-        <p>If you're interested, please join the waitlist by entering your email below:</p>
-        <form action="https://formspree.io/f/xrbznkgv" method="POST">
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <br>
-            <button type="submit">Join Waitlist</button>
-        </form>
-    </div>
+
+    <header>
+        <h1>Day Planner Bot</h1>
+    </header>
+
+    <section class="container">
+        <div class="gallery-container">
+            <!-- Images in the gallery that will snap to the center -->
+            <img src="Plan (3).png" alt="Screenshot 1">
+            <img src="Fast (2).png" alt="Screenshot 2">
+            <img src="Data (1).png" alt="Screenshot 3">
+            <img src="Auto (1).png" alt="Screenshot 4">
+        </div>
+
+        <h2>About the Product</h2>
+        <p class="description">We are developing a Telegram bot that helps you effectively plan your day and analyze how you allocate your time.</p>
+        
+        <div class="features">
+            <h3>Main Features:</h3>
+            <p>🗣 <strong>Text and Voice Planning:</strong> Write your plans as text or send a voice message. The bot will automatically convert your voice to text and organize your plans into a convenient table or list.</p>
+            <p>📊 <strong>Time Analytics:</strong> Analyze your data — see how much time you spend on sleep, gaming, and other activities. Maybe it's time to take control of your time?</p>
+            <p>🤖 <strong>Automatic Planning:</strong> Based on your past data, the bot will create an automatic plan for your day, taking into account your habits and priorities.</p>
+        </div>
+
+        <!-- Two-column layout for plugin link and waitlist form -->
+        <div class="two-column-layout">
+            <!-- Plugin block -->
+            <div class="plugin-block">
+                <h2>Try Our GPT Plugin</h2>
+                <p>Experience the full functionality of our product with the GPT plugin. Get started today!</p>
+                <p><a href="https://chatgpt.com/g/g-XQpeI0D4h-sintes" target="_blank">Learn More About the GPT Plugin</a></p>
+            </div>
+
+            <!-- Waitlist form section -->
+            <div class="waitlist-container">
+                <h2>Join the Waitlist</h2>
+                <p>Sign up to be the first to know when our bot is available!</p>
+                <form action="https://formspree.io/f/xrbznkgv" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <br>
+                    <button type="submit">Join Waitlist</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Day Planner Bot. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
